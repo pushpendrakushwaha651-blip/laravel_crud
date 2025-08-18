@@ -1,0 +1,103 @@
+[
+  
+   {
+    "name": "Pushpendra Kushwaha",
+    "age": 25,
+    "email": "pushpendra@example.com",
+    "address": "Somewhere in India",
+    "city": "Lucknow",
+    "phone": "9876543210",
+    "pdf": null,
+    "password": "password123"
+  },
+  {
+    "name": "Ankit Sharma",
+    "age": 22,
+    "email": "ankit.sharma@example.com",
+    "address": "Gomti Nagar",
+    "city": "Lucknow",
+    "phone": "9876501234",
+    "pdf": null,
+    "password": "password123"
+  },
+  {
+    "name": "Rohit Verma",
+    "age": 24,
+    "email": "rohit.verma@example.com",
+    "address": "Civil Lines",
+    "city": "Prayagraj",
+    "phone": "9812345678",
+    "pdf": null,
+    "password": "password123"
+  },
+  {
+    "name": "Neha Singh",
+    "age": 23,
+    "email": "neha.singh@example.com",
+    "address": "Hazratganj",
+    "city": "Lucknow",
+    "phone": "9823456789",
+    "pdf": null,
+    "password": "password123"
+  },
+  {
+    "name": "Amit Kumar",
+    "age": 26,
+    "email": "amit.kumar@example.com",
+    "address": "Sector 62",
+    "city": "Noida",
+    "phone": "9834567890",
+    "pdf": null,
+    "password": "password123"
+  },
+  {
+    "name": "Priya Yadav",
+    "age": 21,
+    "email": "priya.yadav@example.com",
+    "address": "Rajajipuram",
+    "city": "Lucknow",
+    "phone": "9845678901",
+    "pdf": null,
+    "password": "password123"
+  },
+  {
+    "name": "Vikas Gupta",
+    "age": 27,
+    "email": "vikas.gupta@example.com",
+    "address": "Aliganj",
+    "city": "Lucknow",
+    "phone": "9856789012",
+    "pdf": null,
+    "password": "password123"
+  },
+  {
+    "name": "Sonal Mishra",
+    "age": 24,
+    "email": "sonal.mishra@example.com",
+    "address": "Mahanagar",
+    "city": "Lucknow",
+    "phone": "9867890123",
+    "pdf": null,
+    "password": "password123"
+  },
+  {
+    "name": "Deepak Chauhan",
+    "age": 28,
+    "email": "deepak.chauhan@example.com",
+    "address": "Indira Nagar",
+    "city": "Lucknow",
+    "phone": "9878901234",
+    "pdf": null,
+    "password": "password123"
+  },
+  {
+    "name": "Shreya Pandey",
+    "age": 22,
+    "email": "shreya.pandey@example.com",
+    "address": "Gomti Nagar Extension",
+    "city": "Lucknow",
+    "phone": "9889012345",
+    "pdf": null,
+    "password": "password123"
+  }
+]
