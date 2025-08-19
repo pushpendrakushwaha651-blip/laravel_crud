@@ -116,6 +116,11 @@
                             <label for="userphone" class="form-label">Mobile No</label>
                             <input type="text" id="userphone" class="form-control" name="userphone">
                         </div>
+                        {{-- password filed --}}
+                        <div class="mb-3">
+                            <label for="userpassword" class="form-label">Password</label>
+                            <input type="password" id="userpassword" class="form-control" name="userpassword" required>
+                        </div>
                         <div class="mb-3">
                             <label for="userpdf" class="form-label">Upload PDF</label>
                             <input type="file" id="userpdf" name="userpdf" class="form-control" accept="application/pdf">

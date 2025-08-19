@@ -1,5 +1,11 @@
  <?php
 
+ 
+
+    use Illuminate\Http\Request;
+    use Illuminate\Support\Facades\Route;
+    use App\Http\Controllers\UserController;
+
 // use Illuminate\Http\Request;
 // use Illuminate\Support\Facades\Route;
 // use App\Http\Controllers\UserController;
@@ -51,11 +57,6 @@
 
 // Pushpendra Kushwaha
 // 977050872 
-
-
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
 // use Illuminate\Support\Facades\Route;
 // use App\Http\Controllers\UserController;
 
@@ -131,5 +132,9 @@ Route::view('/newuser', 'adduser')
 Route::get('/search', [UserController::class, 'search'])
     // ->middleware('check.login')
     ->name('search.users');
+
+    // Logout route
+Route::post('/logout', [UserController::class, 'logout'])->name('logout.action');
+
 
 

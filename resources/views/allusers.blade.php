@@ -88,12 +88,29 @@
 
 <div class="container py-5">
     <div class="card card-custom">
+
         <div class="card-header d-flex justify-content-between align-items-center">
-            <span>All Users List</span>
-            <div class="d-flex gap-2">
+            {{-- <span>All Users List</span> --}}
+           
+                <span>All Users List</span>
+
+    <div class="d-flex align-items-center gap-3">
+        <!-- Logged in username -->
+        <span class="fw-bold text-white">
+            👤 {{ session('username') }}
+        </span>
+
+        <!-- Logout button -->
+        <form action="{{ route('logout.action') }}" method="POST" class="d-inline">
+            @csrf
+            <button type="submit" class="btn btn-sm btn-danger">Logout</button>
+        </form>
+
+         <div class="d-flex gap-0">
                 <input type="text" id="search" class="form-control form-control-sm" placeholder="Search users...">
                 <a href="/newuser" class="btn btn-add btn-sm">➕ Add New</a>
             </div>
+    </div>
         </div>
 
         <div class="card-body p-4">
