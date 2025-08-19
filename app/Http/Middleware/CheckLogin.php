@@ -1,5 +1,5 @@
 <?php
-
+// 
 namespace App\Http\Middleware;   // <-- ye line zaroori hai
 
 use Closure;

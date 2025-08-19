@@ -2,6 +2,7 @@
 // http://127.0.0.1:8000 
 namespace App\Http\Controllers;
 
+// correct code
 use Illuminate\Http\Request;   
 use Illuminate\Support\Facades\DB;
 // namespace App\Http\Controllers\Hash;
