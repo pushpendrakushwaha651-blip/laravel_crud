@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;   
 use Illuminate\Support\Facades\DB;
+// namespace App\Http\Controllers\Hash;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -20,6 +22,7 @@ class UserController extends Controller
     //  add new user 
     public function addUser(Request $request) {
         $pdfPath = null;
+        
         if ($request->hasFile('userpdf')) {
             $pdfPath = $request->file('userpdf')->store('pdfs', 'public'); 
         }
@@ -31,6 +34,7 @@ class UserController extends Controller
             'address' => $request->useraddress,
             'city'    => $request->usercity,
             'phone'   => $request->userphone,
+            'password' => Hash::make($request->userpassword), 
             'pdf'     => $pdfPath,
             'created_at' => now(),
             'updated_at' => now(),
@@ -38,7 +42,7 @@ class UserController extends Controller
 
         return redirect()->route('home')->with('success', 'User added successfully!');
     }
-
+//  delete 
     public function deleteUser($id) {
         $deleted = DB::table('students')->where('id', $id)->delete();
         return $deleted 
@@ -46,11 +50,14 @@ class UserController extends Controller
             : redirect()->back()->with('error', 'User not found!');
     }
 
+
+//  updatepage
     public function updatePage(string $id) {
         $user = DB::table('students')->where('id', $id)->first();
         return view('updateuser', ['data' => $user]);
     }
 
+//  updateuser
     public function updateUser(Request $req,$id) {
         $user = DB::table('students')
             ->where('id',$id)
@@ -68,7 +75,7 @@ class UserController extends Controller
             ? redirect()->route('home')->with('success', 'User updated successfully!')
             : redirect()->route('home')->with('error', 'User not updated!');
     }
-
+//  search 
     public function search(Request $request) {
         $query = $request->get('search');
 
@@ -104,4 +111,105 @@ class UserController extends Controller
 
         return response($output);
     }
+
+
+// //  login controler 
+// public function login(Request $req){
+//         $query = $req->get('login');
+//             $password = $req->get('password');
+
+
+        
+//         $users = DB::table('students')
+//             ->where(function($q) use ($query) {
+//                 $q->where('id', 'LIKE', "%{$query}%")
+//                   ->orWhere('name', 'LIKE', "%{$query}%")
+//                   ->orWhere('email', 'LIKE', "%{$query}%")
+//                   ->orWhere('phone', 'LIKE', "%{$query}%");
+//             })
+//             ->first();
+            
+//     if ($users) {
+//         // Password check karna (bcrypt)
+
+//                 session(['username' => $users->name]);
+//         return redirect()->route('home');
+        
+//         if (Hash::check($password, $users->password) || $password === $users->password)
+//              {
+//             // Agar password sahi hai
+//             // return response()->json([
+//             //     'status' => 'success',
+//             //     'message' => 'Login successful',
+//             //     'users' => $users
+//             // ]);
+//                  // Login successful → home page pe redirect
+//             // Optionally session me user info store kar sakte ho
+//             $req->session()->put('user', $users);
+//             return redirect()->route('home');
+
+
+//         } else {
+//             // Agar password galat hai
+//             return response()->json([
+//                 'status' => 'error',
+//                 'message' => 'Invalid password'
+//             ], 401);
+//         }
+//     } else {
+//              return back()->with('error', 'Invalid credentials');
+//         // Agar user nahi mila
+//         // return response()->json([
+//         //     'status' => 'error',
+//         //     'message' => 'User not found'
+//         // ], 404);
+//     }
+// }
+
+
+//  login 
+public function login(Request $req)
+{
+$query = $req->get('login');  
+$password = $req->get('password');
+
+
+    // Debug 1: देखो query में क्या आ रहा है
+    // dd($query, $password);
+
+    $user = DB::table('students')
+        ->where('email', $query)
+        ->orWhere('phone', $query)
+        ->orWhere('id', $query)
+        ->orWhere('name', $query)
+        ->first();
+
+    // Debug 2: देखो user मिल रहा है या नहीं
+    // dd($user);
+
+    if ($user) {
+        // Debug 3: check actual password
+        // dd($user->password);
+
+        if (Hash::check($password, $user->password) || $password === $user->password) {
+            $req->session()->put('username', $user->name);
+            $req->session()->put('user', $user);
+
+            return redirect()->route('home');
+        } else {
+            return back()->with('error', 'Invalid password');
+        }
+    } else {
+        return back()->with('error', 'Invalid credentials');
+    }
+}
+
+//  logout 
+    public function logout(Request $request)
+    {
+        $request->session()->flush(); 
+        return redirect()->route('login.page')->with('success', 'You have logged out successfully.');
+    }
+
+
 }
