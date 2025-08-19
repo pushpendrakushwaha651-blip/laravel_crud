@@ -85,29 +85,21 @@
             <p class="error-msg">{{ session('error') }}</p>
         @endif
 
-        <form action="{{ route('login.check') }}" method="POST">
-            @csrf
-            <div class="mb-3">
-                <label class="form-label">Username</label>
-                <input type="text" name="username" class="form-control" required>
-            </div>
+<form action="{{ route('login.action') }}" method="POST">
+    @csrf
+    <div class="mb-3">
+        <label class="form-label">Username</label>
+        <input type="text" name="username" class="form-control" required>
+    </div>
 
-            <div class="mb-3">
-                <label class="form-label">Password</label>
-                <input type="password" name="password" class="form-control" required>
-            </div>
+    <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input type="password" name="password" class="form-control" required>
+    </div>
 
-            <div class="mb-3 text-end">
-                {{-- <a href="#" class="text-muted">Username: admin
-                    <br>
+    <button type="submit" class="btn btn-login w-100">Login</button>
+</form>
 
-Password: admin123</a> --}}
- <p class="mb-1">👉 Username: <b>admin</b></p>
-                            <p class="mb-0">👉 Password: <b>admin123</b></p>
-            </div>
-
-            <button type="submit" class="btn btn-login w-100">Login</button>
-        </form>
 
         <div class="mt-3 text-center">
             <a href="/newuser" class="text-muted">Create Account</a>
@@ -117,3 +109,8 @@ Password: admin123</a> --}}
 
 </body>
 </html>
+ {{-- <div class="mb-3 text-end">
+          
+ <p class="mb-1">👉 Username: <b>admin</b></p>
+                            <p class="mb-0">👉 Password: <b>admin123456</b></p>
+            </div> --}}

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;   
 use Illuminate\Support\Facades\DB;
+// namespace App\Http\Controllers\Hash;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -104,4 +106,70 @@ class UserController extends Controller
 
         return response($output);
     }
+
+//     Route::post('/login', function (Request $request) {
+//     $username = $request->input('username');
+//     $password = $request->input('password');
+
+//     if ($username === 'admin' && $password === 'admin123456') {
+//         return redirect()->route('home')->with('success', 'Login Successful!');
+//     } else {
+//         return redirect()->route('login.page')->with('error', 'Invalid Username or Password!');
+//     }
+// })->name('login.check');
+
+
+public function login(Request $req){
+        $query = $req->get('login');
+            $password = $req->get('password');
+
+
+        
+        $users = DB::table('students')
+            ->where(function($q) use ($query) {
+                $q->where('id', 'LIKE', "%{$query}%")
+                  ->orWhere('name', 'LIKE', "%{$query}%")
+                  ->orWhere('email', 'LIKE', "%{$query}%")
+                  ->orWhere('phone', 'LIKE', "%{$query}%");
+            })
+            ->first();
+            
+    if ($users) {
+        // Password check karna (bcrypt)
+        if (Hash::check($password, $users->password) || $password === $users->password)
+             {
+            // Agar password sahi hai
+            // return response()->json([
+            //     'status' => 'success',
+            //     'message' => 'Login successful',
+            //     'users' => $users
+            // ]);
+                 // Login successful → home page pe redirect
+            // Optionally session me user info store kar sakte ho
+            $req->session()->put('user', $users);
+            return redirect()->route('home');
+
+
+        } else {
+            // Agar password galat hai
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Invalid password'
+            ], 401);
+        }
+    } else {
+        // Agar user nahi mila
+        return response()->json([
+            'status' => 'error',
+            'message' => 'User not found'
+        ], 404);
+    }
+
+
+
+
+
+}
+
+
 }
